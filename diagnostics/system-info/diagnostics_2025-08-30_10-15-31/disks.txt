@@ -1,0 +1,15 @@
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0         7:0    0     4K  1 loop /var/lib/snapd/snap/bare/5
+loop1         7:1    0  55.5M  1 loop /var/lib/snapd/snap/core18/2940
+loop2         7:2    0  55.5M  1 loop /var/lib/snapd/snap/core18/2934
+loop3         7:3    0  63.8M  1 loop /var/lib/snapd/snap/core20/2599
+loop4         7:4    0 164.8M  1 loop /var/lib/snapd/snap/gnome-3-28-1804/198
+loop5         7:5    0  91.7M  1 loop /var/lib/snapd/snap/gtk-common-themes/1535
+loop6         7:6    0  88.6M  1 loop /var/lib/snapd/snap/notion-desktop/3
+loop7         7:7    0  50.8M  1 loop /var/lib/snapd/snap/snapd/25202
+nvme0n1     259:0    0 476.9G  0 disk 
+├─nvme0n1p1 259:1    0   300M  0 part /boot/efi
+└─nvme0n1p2 259:2    0 476.6G  0 part /var/log
+                                      /var/cache
+                                      /home
+                                      /
