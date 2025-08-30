@@ -1,8 +1,8 @@
 #!/bin/bash
 
-mkdir -p diagnostics/system-info
+mkdir -p /system-info
 
-OUTDIR="diagnostics/system-info/diagnostics_$(date +%Y-%m-%d_%H-%M-%S)"
+OUTDIR="/system-info/diagnostics_$(date +%Y-%m-%d_%H-%M-%S)"
 mkdir -p "$OUTDIR"
 
 uname -a > "$OUTDIR/kernel_info.txt"
