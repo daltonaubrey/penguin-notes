@@ -1,5 +1,0 @@
-LSB Version:	n/a
-Distributor ID:	ManjaroLinux
-Description:	Manjaro Linux
-Release:	25.0.7
-Codename:	Zetar
