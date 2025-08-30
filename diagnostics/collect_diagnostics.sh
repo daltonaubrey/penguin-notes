@@ -1,10 +1,12 @@
 #!/bin/bash
 
+HOST_NAME=$(hostname)
+
 SCRIPT_DIR="$(cd "$(dirname "$BASH_SOURCE[0]}")" && pwd)"
 
 mkdir -p "$SCRIPT_DIR/system-info"
 
-OUTDIR="$SCRIPT_DIR/system-info/diagnostics_$(date +%Y-%m-%d_%H-%M-%S)"
+OUTDIR="$SCRIPT_DIR/system-info/${HOST_NAME}_diagnostics_$(date +%Y-%m-%d_%H-%M-%S)"
 mkdir -p "$OUTDIR"
 
 uname -a > "$OUTDIR/kernel_info.txt"
