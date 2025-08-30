@@ -23,9 +23,22 @@ dmesg | tail -n 200 > "$OUTDIR/dmesg_tail.txt"
 
 systemctl list-units --type=service --state=running > "$OUTDIR/running_services.txt"
 
-git add diagnostics/system-info/
+git stash push -u -m "Auto-stash before pulling for diagnostics" >/dev/null 2>&1
+
+git pull --rebase origin main || git rebase --abort
+
+git stash pop >/dev/null 2>&1
+
+git add "%OUTDIR"
 git commit -m "Add diagnostics snapshot $(date +%Y-%m-%d_%H:%M:%S)" || echo "Nothing to commit"
-git pull --rebase origin main 2>/dev/null || true
 git push origin main 2>/dev/null || git push -u origin main
 
+SNAPSHOTS_DIR="system_info"
+cd "$SNAPSHOTS_DIR" || exit
+
+ls -1dt diagnostics_* | tail -n +11 | xargs -r rm -rf
+
+cd - >/dev/null
+
 echo "Diagnostics collected and pushed to Github: $OUTDIR/"
+echo "Old snapshots beyond the last 10 have been deleted."
