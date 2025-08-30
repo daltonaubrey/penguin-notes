@@ -1,8 +1,10 @@
 #!/bin/bash
 
-mkdir -p /system-info
+SCRIPT_DIR="$(cd "$(dirname "$BASH_SOURCE[0]}")" && pwd)"
 
-OUTDIR="/system-info/diagnostics_$(date +%Y-%m-%d_%H-%M-%S)"
+mkdir -p "$SCRIPT_DIR/system-info"
+
+OUTDIR="$SCRIPT_DIR/system-info/diagnostics_$(date +%Y-%m-%d_%H-%M-%S)"
 mkdir -p "$OUTDIR"
 
 uname -a > "$OUTDIR/kernel_info.txt"
@@ -19,7 +21,7 @@ ip route show > "$OUTDIR/network_routes.txt"
 nmcli dev status > "$OUTDIR/nmcli_devices.txt" 2>/dev/null || true
 
 lsmod > "$OUTDIR/loaded_modules.txt"
-dmesg | tail -n 200 > "$OUTDIR/dmesg_tail.txt"
+dmesg --level=err,warn,crit > "$OUTDIR/dmesg_tail.txt" 2>/dev/null
 
 systemctl list-units --type=service --state=running > "$OUTDIR/running_services.txt"
 
@@ -29,11 +31,11 @@ git pull --rebase origin main || git rebase --abort
 
 git stash pop >/dev/null 2>&1
 
-git add "%OUTDIR"
+git add "$OUTDIR"
 git commit -m "Add diagnostics snapshot $(date +%Y-%m-%d_%H:%M:%S)" || echo "Nothing to commit"
 git push origin main 2>/dev/null || git push -u origin main
 
-SNAPSHOTS_DIR="system_info"
+SNAPSHOTS_DIR="$SCRIPT_DIR/system-info"
 cd "$SNAPSHOTS_DIR" || exit
 
 ls -1dt diagnostics_* | tail -n +11 | xargs -r rm -rf
