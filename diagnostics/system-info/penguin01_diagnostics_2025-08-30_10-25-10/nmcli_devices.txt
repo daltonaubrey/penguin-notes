@@ -1,0 +1,4 @@
+DEVICE          TYPE      STATE                   CONNECTION      
+wlp2s0          wifi      connected               Linksys_AUBREY_ 
+lo              loopback  connected (externally)  lo              
+p2p-dev-wlp2s0  wifi-p2p  disconnected            --              
